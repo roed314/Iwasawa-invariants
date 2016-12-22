@@ -558,13 +558,13 @@ def text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile
 				line += str(data[j][a][1]) + ','
 				line += str(data[j][a][2]) + ' '			
 		line += '\n'
-		if datafile == None:
-			print line,
-		else:
+		print line,
+		if datafile != None:
 			write_to_file(datafile,line)
 	if logfile != None:
 		line = "----------------Total time: " + str(round(time.time()-start,2)) + '\n'
 		write_to_file(logfile,line)
+	del phi
 	return "Done"
 
 
