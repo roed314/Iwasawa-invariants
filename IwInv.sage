@@ -32,7 +32,7 @@ def mu_bail(p):
 		return -1
 
 
-def MazurTate(E,p,n,phi=None,twist=0,logfile=None,bigcallfile=None,bigcall=infinity):
+def MazurTate(E,p,n,phi=None,twist=0,modp=false,logfile=None,bigcallfile=None,bigcall=infinity):
 	"""
 	Returns the p-adic Mazur-Tate element of level n.  That is, for p odd, we take the element
 
@@ -74,7 +74,10 @@ def MazurTate(E,p,n,phi=None,twist=0,logfile=None,bigcallfile=None,bigcall=infin
 	if phi == None:
 		phi = (E.modular_symbol(),1/E.real_components())
 
-	R.<T> = PolynomialRing(QQ)
+	if modp and (p!=2):
+		R.<T> = PolynomialRing(GF(p))
+	else:
+		R.<T> = PolynomialRing(QQ)
 	if n == -1:
 		ans = R(phi[0](0)*phi[1])
 	else:
@@ -92,7 +95,7 @@ def MazurTate(E,p,n,phi=None,twist=0,logfile=None,bigcallfile=None,bigcall=infin
 					cj = sum([phi[0](gampow * teich[a] / p^(n+1)) for a in range(1,(p+1)/2)])
 				else:
 					cj = sum([teich[a]^twist * phi[0](gampow * teich[a] / p^(n+1)) for a in range(1,(p+1)/2)])					
-				mt = mt + cj * oneplusTpow
+				mt = mt + R(cj) * oneplusTpow
 				gampow = gampow * gam
 				oneplusTpow = oneplusTpow * (1 + T)
 			end = time.time()
@@ -102,7 +105,7 @@ def MazurTate(E,p,n,phi=None,twist=0,logfile=None,bigcallfile=None,bigcall=infin
 				line += ", time: "+str(end-start)+"\n"
 				write_to_file(bigcallfile,line)
 
-			ans = 2 * R(mt) * phi[1]
+			ans = 2 * R(mt) * R(phi[1])
 				##extra factor of 2 here is because we are only summing up to (p-1)/2
 				##and using the + modular symbol
 		else:
@@ -259,7 +262,7 @@ def iwasawa_invariants_of_ec(E,p,twist=0,phi=None,scale=None,logfile=None,warnfi
 			done = false
 			mt = 0
 			while (not done) and (n <= mu_bail(p)):
-				mt = MazurTate(E,p,n,phi=phi,twist=twist,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall)
+				mt = MazurTate(E,p,n,phi=phi,twist=twist,modp=true,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall)
 				if ((mu(mt,p) == 0) and (lamb(mt,p) < p^n-p^(n-1))) or (n >= mu_bail(p)):
 					done = true
 				else:
@@ -319,11 +322,11 @@ def iwasawa_invariants_of_ec(E,p,twist=0,phi=None,scale=None,logfile=None,warnfi
 			### The three-term relation then forces that mu(theta_n)=0 and lambda(theta_n)=q_n
 			### so that mu^\pm = lambda^\pm = 0.
 		else:
-			MTs = [MazurTate(E,p,1,phi=phi,twist=twist,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall),MazurTate(E,p,2,phi=phi,twist=twist,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall)]
+			MTs = [MazurTate(E,p,1,phi=phi,twist=twist,modp=true,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall),MazurTate(E,p,2,phi=phi,twist=twist,modp=true,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall)]
 			done = (mu(MTs[0],p) == 0) and (mu(MTs[1],p) == 0)
 			n = 3
 			while not done and (n <= mu_bail(p)):
-				MTs += [MazurTate(E,p,n,phi=phi,twist=twist,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall)]
+				MTs += [MazurTate(E,p,n,phi=phi,twist=twist,modp=true,logfile=logfile,bigcallfile=bigcallfile,bigcall=bigcall)]
 				done = (mu(MTs[n-1],p) == 0) and (mu(MTs[n-2],p) == 0)
 				n = n + 1
 			n = n - 1
