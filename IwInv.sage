@@ -489,6 +489,7 @@ def text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile
 		lambda, mu -- ordinary invariants
 		lambda^+,lambda^-,0 -- supersingular invariatns (if mu^\pm nonzero program crashes)
 	"""
+	start=time.time()
 	E = EllipticCurve(C[0][0])
 	N = E.conductor()
 	if logfile != None:
@@ -561,6 +562,9 @@ def text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile
 			print line,
 		else:
 			write_to_file(datafile,line)
+	if logfile != None:
+		line = "----------------Total time: " + str(round(time.time()-start,2)) + '\n'
+		write_to_file(logfile,line)
 	return "Done"
 
 
