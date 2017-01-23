@@ -1,0 +1,4 @@
+For 35001a1 and p=3889 minimal mu is +Infinity
+For 35001b1 and p=3889 minimal mu is +Infinity
+For 35004c1 and p=2917 minimal mu is +Infinity
+For 35004d1 and p=2917 minimal mu is +Infinity

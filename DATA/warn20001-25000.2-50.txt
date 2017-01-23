@@ -1,0 +1,7 @@
+For 20005a1 and p=4001 minimal mu is +Infinity
+For 20006a1 and p=1429 minimal mu is +Infinity
+For 20006c1 and p=1429 minimal mu is +Infinity
+For 20014a1 and p=10007 minimal mu is +Infinity
+For 20018a1 and p=10009 minimal mu is +Infinity
+For 20019a1 and p=6673 minimal mu is +Infinity
+For 20019b1 and p=6673 minimal mu is +Infinity

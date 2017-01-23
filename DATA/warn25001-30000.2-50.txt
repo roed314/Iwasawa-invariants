@@ -1,0 +1,1 @@
+For 25015a1 and p=5003 minimal mu is +Infinity

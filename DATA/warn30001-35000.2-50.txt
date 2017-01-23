@@ -1,0 +1,9 @@
+For 30001a1 and p=1579 minimal mu is +Infinity
+For 30002a1 and p=2143 minimal mu is +Infinity
+For 30006b1 and p=1667 minimal mu is +Infinity
+For 30006c1 and p=1667 minimal mu is +Infinity
+For 30006d1 and p=1667 minimal mu is +Infinity
+For 30006e1 and p=1667 minimal mu is +Infinity
+For 30009a1 and p=1429 minimal mu is +Infinity
+For 30010a1 and p=3001 minimal mu is +Infinity
+For 30010b1 and p=3001 minimal mu is +Infinity
