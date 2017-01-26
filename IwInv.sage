@@ -417,9 +417,20 @@ def data_p(C,p,phi=None,twist=0,scale=None,logfile=None,warnfile=None,bigcallfil
 		line = " Computing with p = "+str(p)+'\n'
 		write_to_file(logfile,line)
 
+	N=E.conductor()
 	if E.has_additive_reduction(p):
 		return ['a' for j in range(len(C))]
-	elif E.is_ordinary(p):
+
+	## These lines deal with the fact that there are problems with 2-normalizations
+	## in square-level
+
+	if N.is_square() and (p==2):
+		if E.is_ordinary(2):
+			return ['?o' for j in range(len(C))]
+		else:
+			return ['?s' for j in range(len(C))]
+
+	if E.is_ordinary(p):
 		ans = []		
 		m,l = iwasawa_invariants_of_ec(E,p,phi=phi,twist=twist,scale=1,logfile=logfile,warnfile=warnfile,bigcallfile=bigcallfile,bigcall=bigcall)
 		for j in range(len(C)):
@@ -642,4 +653,43 @@ def qn(p,n):
 	else:
 		return sum([p^a - p^(a-1) for a in range(2,n,2)])
 
+
+def collect_iwasawa_invariants_of_ecs_square_level(minC,maxC,minp,maxp,twist=0,datafile=None,logfile=None,warnfile=None,bigcallfile=None,bigcall=infinity):
+	"""
+	Top level function which rungs through all isogeny classes with square conductors between minC and maxC
+	and computes Iwasawa invariants for primes between minp and maxp.
+
+	Input:
+
+	-	``minC`` -- integer
+
+	-	``maxC`` -- integer
+
+	-	``minp`` -- integer
+
+	-	``maxp`` -- integer
+
+	-	``twist`` -- 0 (default) or integer between 0 and p-2 
+
+	-	``datafile`` -- None (default) or string; if given then data is outputted to the file ``datafile``
+
+	-	``logfile`` -- None (default) or string; if given then information about the computation is outputted
+		to the file ``logfile``
+
+	-	``warnfile`` -- None (default) or string; if given then warnings about postive mu's are outputted
+		to the file ``warnfile``
+
+	- 	``bigcallfile`` -- string (see below)
+
+	-	``bigcall`` -- infinity (Default) or some real number.  When specified, writes info to bigcallfile
+		if the call to this function makes longer than ``bigcall``
+	"""
+
+	DB = CremonaDatabase()
+	for N in range(minC,maxC+1):
+		if ZZ(N).is_square():
+			Cs = DB.isogeny_classes(N)
+			for C in Cs:
+				text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile=datafile,logfile=logfile,warnfile=warnfile,bigcallfile=bigcallfile,bigcall=bigcall)
+	return "Done"
 
