@@ -426,9 +426,9 @@ def data_p(C,p,phi=None,twist=0,scale=None,logfile=None,warnfile=None,bigcallfil
 
 	if N.is_square() and (p==2):
 		if E.is_ordinary(2):
-			return ['?o' for j in range(len(C))]
+			return ['o?' for j in range(len(C))]
 		else:
-			return ['?s' for j in range(len(C))]
+			return ['s?' for j in range(len(C))]
 
 	if E.is_ordinary(p):
 		ans = []		
