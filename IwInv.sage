@@ -612,10 +612,9 @@ def collect_iwasawa_invariants_of_ecs(minC,maxC,minp,maxp,twist=0,datafile=None,
 
 	DB = CremonaDatabase()
 	for N in range(minC,maxC+1):
-		if not ZZ(N).is_square():
-			Cs = DB.isogeny_classes(N)
-			for C in Cs:
-				text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile=datafile,logfile=logfile,warnfile=warnfile,bigcallfile=bigcallfile,bigcall=bigcall)
+		Cs = DB.isogeny_classes(N)
+		for C in Cs:
+			text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile=datafile,logfile=logfile,warnfile=warnfile,bigcallfile=bigcallfile,bigcall=bigcall)
 	return "Done"
 
 def mu(f,p):
@@ -652,6 +651,8 @@ def qn(p,n):
 		return sum([p^a - p^(a-1) for a in range(1,n,2)])
 	else:
 		return sum([p^a - p^(a-1) for a in range(2,n,2)])
+
+
 
 
 def collect_iwasawa_invariants_of_ecs_square_level(minC,maxC,minp,maxp,twist=0,datafile=None,logfile=None,warnfile=None,bigcallfile=None,bigcall=infinity):
