@@ -7,8 +7,8 @@ Nmax=75000
 pmin=2
 pmax=50
 
-data=\"../DATA/data$Nmin.$Nmax.$pmin.$pmax.txt\"
-warn=\"../DATA/warn$Nmin.$Nmax.$pmin.$pmax.txt\"
+data=\"../DATA/data$Nmin-$Nmax.$pmin-$pmax.txt\"
+warn=\"../DATA/warn$Nmin-$Nmax.$pmin-$pmax.txt\"
 bcf=\"../DATA/bigcalls$Nmin.$Nmax.$pmin.$pmax.txt\"
 bc=30
 
