@@ -16,7 +16,7 @@ echo $data
 
 
 ## If program crashes edit HERE.
-Ncurrent=$Nmin
+Ncurrent=60996
 
 while [ $Ncurrent -le $Nmax ]; do
 	echo "Trying level $Ncurrent"
