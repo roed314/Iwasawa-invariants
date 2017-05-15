@@ -6,9 +6,15 @@ def num_curves_with_conductor(N):
 		ans+=len(Cs[j])
 	return ans
 
+
 def num_curves_with_conductor_at_most(M):
 	ans=0
-	for N in range(1,M):
+	for N in range(1,M+1):
 		ans+=num_curves_with_conductor(N)
-		print ans
+	return ans
+
+def num_curves_with_conductor_in_range(M1,M2):
+	ans=0
+	for N in range(M1,M2+1):
+		ans+=num_curves_with_conductor(N)
 	return ans
