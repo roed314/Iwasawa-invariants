@@ -187,7 +187,7 @@ def mu_minimized_modular_symbol(C,sign=1,logfile=None):
 	return (phi,1/Emin.real_components()),scale
 
 def iwasawa_invariants_of_ec(E,p,twist=0,phi=None,scale=None,logfile=None,warnfile=None,bigcallfile=None,bigcall=infinity):
-	"""
+	r"""
 	Returns the mu and lambda invariants of E (for the prime p).  
 
 	If twist is non-zero then it returns the twisted invariants (e.g. corresponding to E[p^infty] \otimes omega^twist)
@@ -451,7 +451,7 @@ def data_p(C,p,phi=None,twist=0,scale=None,logfile=None,warnfile=None,bigcallfil
 
 
 def text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile=None,logfile=None,warnfile=None,bigcallfile=None,bigcall=infinity):
-	"""
+	r"""
 	Writes to file or screen strings containing the data of the iwasawa invariants for the curves 
 	in a given isogeny class.
 
@@ -569,7 +569,7 @@ def text_for_iwasawa_invariants_of_ec_isogeny_class(C,minp,maxp,twist=0,datafile
 				line += str(data[j][a][1]) + ','
 				line += str(data[j][a][2]) + ' '			
 		line += '\n'
-		print line,
+		print(line),
 		if datafile != None:
 			write_to_file(datafile,line)
 	if logfile != None:
